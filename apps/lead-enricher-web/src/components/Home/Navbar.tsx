@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth, provider } from "../../lib/firebase";
 import {
   User,
@@ -8,6 +9,7 @@ import {
 } from "firebase/auth";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -21,6 +23,7 @@ export default function Navbar() {
     try {
       const result = await signInWithPopup(auth, provider);
       setUser(result.user);
+      navigate("/lead");
     } catch (error) {
       console.error("Error signing in with Google", error);
     }

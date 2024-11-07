@@ -55,8 +55,8 @@ export default function LeadCaptureForm() {
   return (
     <div>
       <Navbar />
-      <div className="flex h-screen">
-        <div className="w-1/2 flex items-center justify-center bg-gray-100 p-6">
+      <div className="md:flex h-screen">
+        <div className="md:w-1/2 flex items-center justify-center bg-gray-100 p-6">
           <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">
               Lead Capture Form
@@ -104,14 +104,13 @@ export default function LeadCaptureForm() {
           </div>
         </div>
 
-        {/* Right side: Display Enriched Data */}
-        <div className="w-1/2 flex items-center justify-center bg-white p-6">
+        <div className="md:w-1/2 flex items-center justify-center bg-white p-6">
           {loading ? (
             <div className="flex justify-center items-center space-x-2">
               <div role="status">
                 <svg
                   aria-hidden="true"
-                  className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  className="w-8 h-8 text-gray-200 animate-spin fill-blue-600"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +128,7 @@ export default function LeadCaptureForm() {
             </div>
           ) : enrichedData ? (
             <div className="min-h-screen flex items-center justify-center p-4">
-              <div className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 space-y-6">
+              <div className="w-full max-w-2xl bg-white  rounded-lg shadow-lg p-6 space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="bg-gray-100 rounded-full p-4">
                     <img
@@ -144,7 +143,7 @@ export default function LeadCaptureForm() {
                     </h2>
                     <a
                       href={enrichedData.url}
-                      className="text-blue-600 dark:text-blue-400 hover:underline"
+                      className="text-blue-600  hover:underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -170,8 +169,8 @@ export default function LeadCaptureForm() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
+                <div className="pt-4 border-t border-gray-200 ">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-900 ">
                     About
                   </h3>
                   <p className="text-gray-600 leading-relaxed">

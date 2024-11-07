@@ -1,6 +1,30 @@
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { auth, onAuthStateChanged } from "../../lib/firebase";
 import Navbar from "./Navbar";
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+  }, []);
+
+  const handleLeadClick = () => {
+    if (!isLoggedIn) {
+      toast.error("You need to login to capture a lead");
+    } else {
+      // Redirect to the lead capture form if logged in
+      window.location.href = "/lead";
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900">
       <Navbar />
@@ -12,12 +36,12 @@ export default function Home() {
             Supercharge Your Lead Generation
           </h1>
           <p className="text-xl sm:text-2xl md:text-3xl mb-12 text-gray-600">
-            Turn basic information into comprehensive lead profiles in seconds
-            with LeadEnrich
+            Turn basic information into comprehensive leads in seconds with
+            LeadEnrich
           </p>
           <a
             className="text-lg px-8 py-4 font-semibold rounded-lg shadow-md hover:shadow-lg transition duration-300"
-            href="/lead"
+            onClick={handleLeadClick}
           >
             Capture Lead
           </a>
