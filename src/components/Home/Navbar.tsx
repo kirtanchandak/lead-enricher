@@ -1,6 +1,6 @@
 // Navbar.tsx
 import React, { useState } from "react";
-import { auth, provider } from "../lib/firebase";
+import { auth, provider } from "../../lib/firebase";
 import { User } from "firebase/auth";
 import { signInWithPopup } from "firebase/auth";
 
