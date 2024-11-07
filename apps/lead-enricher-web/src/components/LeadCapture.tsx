@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { Users, Factory, Calendar } from "lucide-react";
 import Navbar from "./Home/Navbar";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 interface EnrichedCompanyData {
   url: string;
@@ -33,10 +34,10 @@ export default function LeadCaptureForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true); // Start loading when the form is submitted
+    setLoading(true);
     try {
       const response = await axios.post(
-        "https://lead-enricher-v1.braveforest-f0c4e1ce.eastus2.azurecontainerapps.io/api/enrich ",
+        "https://lead-enricher-v1.braveforest-f0c4e1ce.eastus2.azurecontainerapps.io/api/enrich",
         {
           company: companyName,
           website: websiteUrl,
@@ -45,8 +46,9 @@ export default function LeadCaptureForm() {
       setEnrichedData(response?.data);
     } catch (error) {
       console.error("Error enriching lead:", error);
+      toast.error("Failed to enrich lead. Please try again.");
     } finally {
-      setLoading(false); // Stop loading when the response is received or an error occurs
+      setLoading(false);
     }
   };
 
@@ -84,6 +86,7 @@ export default function LeadCaptureForm() {
                   Website URL
                 </label>
                 <input
+                  type="url"
                   id="websiteUrl"
                   value={websiteUrl}
                   onChange={(e) => setWebsiteUrl(e.target.value)}
