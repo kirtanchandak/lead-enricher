@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, FormEvent } from "react";
 import Navbar from "./Home/Navbar";
 

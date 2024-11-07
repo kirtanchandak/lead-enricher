@@ -1,11 +1,21 @@
-// Navbar.tsx
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth, provider } from "../../lib/firebase";
-import { User } from "firebase/auth";
-import { signInWithPopup } from "firebase/auth";
+import {
+  User,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
 export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleGoogleLogin = async () => {
     try {
@@ -13,6 +23,15 @@ export default function Navbar() {
       setUser(result.user);
     } catch (error) {
       console.error("Error signing in with Google", error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (error) {
+      console.error("Error signing out", error);
     }
   };
 
@@ -29,12 +48,14 @@ export default function Navbar() {
                 <span className="flex gap-2 items-center text-sm text-gray-700">
                   <img
                     className="w-8 rounded-full"
-                    src={user?.photoURL ?? ""}
+                    src={user.photoURL ?? ""}
                     alt="user-img"
                   />
-                  {user?.displayName}!{" "}
+                  {user.displayName}
                 </span>
-                <button className="hover:underline">Logout</button>
+                <button onClick={handleLogout} className="hover:underline">
+                  Logout
+                </button>
               </div>
             ) : (
               <button onClick={handleGoogleLogin} className="hover:underline">
