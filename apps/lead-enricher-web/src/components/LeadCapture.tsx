@@ -36,7 +36,7 @@ export default function LeadCaptureForm() {
     setLoading(true); // Start loading when the form is submitted
     try {
       const response = await axios.post(
-        "https://lead-enricher-v1.braveforest-f0c4e1ce.eastus2.azurecontainerapps.io/api/enrich/",
+        "https://lead-enricher-v1.braveforest-f0c4e1ce.eastus2.azurecontainerapps.io/api/enrich ",
         {
           company: companyName,
           website: websiteUrl,
