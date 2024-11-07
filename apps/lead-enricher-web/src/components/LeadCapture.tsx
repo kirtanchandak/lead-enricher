@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { Building2, Users, Factory, Calendar } from "lucide-react";
+import { Users, Factory, Calendar } from "lucide-react";
 import Navbar from "./Home/Navbar";
 import axios from "axios";
 
@@ -35,11 +35,13 @@ export default function LeadCaptureForm() {
     e.preventDefault();
     setLoading(true); // Start loading when the form is submitted
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/enrich", {
-        company: companyName,
-        website: websiteUrl,
-      });
-
+      const response = await axios.post(
+        "https://lead-enricher-v1.braveforest-f0c4e1ce.eastus2.azurecontainerapps.io/api/enrich/",
+        {
+          company: companyName,
+          website: websiteUrl,
+        }
+      );
       setEnrichedData(response?.data);
     } catch (error) {
       console.error("Error enriching lead:", error);
